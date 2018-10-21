@@ -3,6 +3,7 @@ import wave
 import numpy as np
 import matplotlib.pyplot as plot
 import scipy.io.wavfile
+import scipy.signal
 
 
 filename = '../MojaNajdrozsza_16bit_PCM.wav'
@@ -48,7 +49,7 @@ class AudioFile:
 
     # region Plots
 
-    def show_oscillogram(self):
+    def oscillogram(self):
         fs, signal = self.get_data()
         signal = np.fromstring(signal, np.int16)
 
@@ -57,6 +58,38 @@ class AudioFile:
         plot.figure(1)
         plot.title(filename)
         plot.plot(time_axis, signal)
+        plot.xlabel('Czas [s]')
+        plot.ylabel('Amplituda')
+        plot.show()
+
+    def stft(self):
+        fs, signal = self.get_data()
+        f, t, Zxx = scipy.signal.stft(signal, fs)
+
+        plot.figure(2)
+        plot.pcolormesh(t, f, np.abs(Zxx))
+        plot.xlabel('Czas [s]')
+        plot.ylabel('Częstotliwość [Hz]')
+        plot.show()
+
+    def windows(self):
+        fs, signal = self.get_data()
+
+        fig, axes = plot.subplots(2, 3, tight_layout=True)
+
+        # Window lengths in [ms]
+        win_lengths = [5, 10, 20, 50, 100, 200]
+
+        for i in range(6):
+            window = scipy.signal.get_window('hamming', int(fs * (win_lengths[i] / 1000)))
+            f, t, Zxx = scipy.signal.stft(signal, fs, window, nperseg=len(window))
+
+            ax = axes[i // 3 - 1, i % 3]
+            ax.pcolormesh(t, f, np.abs(Zxx))
+            ax.set_title("Okno Hamminga {} ms".format(win_lengths[i]))
+            ax.set_xlabel('Czas [s]')
+            ax.set_ylabel('Częstotliwość [Hz]')
+
         plot.show()
 
     # endregion
@@ -74,9 +107,11 @@ class AudioFile:
 
 def main():
     file = AudioFile(filename)
-    file.play()
+    # file.play()
 
-    file.show_oscillogram()
+    # file.oscillogram()
+    # file.stft()
+    file.windows()
 
     file.close()
 
