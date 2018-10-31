@@ -56,6 +56,8 @@ class Lab3:
     def mfcc_stats(mfcc_a, mfcc_i):
         a_coefficients_avg = []
         i_coefficients_avg = []
+        a_std_dev = []
+        i_std_dev = []
 
         for i in range(2):
             a_coefficients = mfcc_a[:, i]
@@ -64,11 +66,17 @@ class Lab3:
             a_coefficients_avg.append(np.mean(a_coefficients))
             i_coefficients_avg.append(np.mean(i_coefficients))
 
-        print("Aaa: ")
-        print("C1 mean: {}\nC2 mean: {}".format(a_coefficients_avg[0], a_coefficients_avg[1]))
+            a_std_dev.append(np.std(a_coefficients))
+            i_std_dev.append(np.std(i_coefficients))
 
-        print("Iii: ")
-        print("C1 mean: {}\nC2 mean: {}".format(i_coefficients_avg[0], i_coefficients_avg[1]))
+        print("/a/: ")
+        print("C1 mean: {:.2f}\nC2 mean: {:.2f}".format(a_coefficients_avg[0], a_coefficients_avg[1]))
+        print("C1 std dev: {:.2f}\nC2 std dev: {:.2f}".format(a_std_dev[0], a_std_dev[1]))
+
+        print("/i/: ")
+        print("C1 mean: {:.2f}\nC2 mean: {:.2f}".format(i_coefficients_avg[0], i_coefficients_avg[1]))
+        print("C1 std dev: {:.2f}\nC2 std dev: {:.2f}".format(i_std_dev[0], i_std_dev[1]))
+
 
     def laryngeal_tone(self):
         win_length = 25
@@ -109,9 +117,11 @@ class Lab3:
             plot.figure()
             plot.plot(r)
             # plot.plot(peaks, r[peaks], "x")
-            plot.xlabel('Lag (samples)')
-            plot.title("f0 = {}".format(f))
+            plot.xlabel('Próbka')
+            # plot.title("f0 = {}".format(f))
             # plot.xlim(0, 1500)
+
+            print(f)
 
         plot.show()
 
