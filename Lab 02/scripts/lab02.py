@@ -6,7 +6,7 @@ import scipy.io.wavfile
 import scipy.signal
 
 
-filename = '../MojaNajdrozsza_16bit_PCM.wav'
+filename = '../audio/MojaNajdrozsza_16bit_PCM.wav'
 
 
 class AudioFile:
