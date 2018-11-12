@@ -38,9 +38,6 @@ class Lab3:
         fig, (ax1, ax2) = plot.subplots(2, 2, tight_layout=True)
 
         for i in range(2):
-            # a_coefficients = mfcc_a[i, :]
-            # i_coefficients = mfcc_i[i, :]
-
             a_coefficients = mfcc_a[:, i]
             i_coefficients = mfcc_i[:, i]
 
