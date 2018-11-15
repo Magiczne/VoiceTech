@@ -17,44 +17,54 @@ class GmmAnalyzer:
 
     def get_gmm(self, mfcc, n_components, n_iter):
         self.n_components = n_components
-        gmm = mixture.GaussianMixture(n_components=n_components, covariance_type='diag')
-        gmm.n_iter_ = n_iter
+        gmm = mixture.GaussianMixture(n_components=n_components, covariance_type='diag', max_iter=n_iter)
+        # gmm.n_iter_ = n_iter
         return gmm.fit(mfcc)
 
     @staticmethod
     def gaussian(x, mu, sigma):
         return norm.pdf(x, loc=mu, scale=sigma)
 
-    def plot_mixture_model(self, mfcc, gmm, m):
+    def plot_mixture_model(self, mfcc, gmm, m, plot=True, plot_show=True, legend=True):
         """
         :type gmm:      mixture.GaussianMixture
         :param mfcc:    MFCC data
         :param gmm:     GMM data
         :param m:       MFCC Coefficient number (from 0)
+        :param plot_show:
+        :param plot:
+        :param legend:
         :return:
         """
-        c_m = mfcc[:, m]
+        if plot:
+            c_m = mfcc[:, m]
 
-        plt.hist(c_m)
-        plt.title('Dopasowanie dla współczynnika C{}'.format(m))
+            plt.hist(c_m, density=True)
+            plt.title('Dopasowanie dla współczynnika C{}'.format(m))
 
-        space = np.linspace(min(c_m), max(c_m))
-        gauss_sum = np.zeros(len(space))
+            space = np.linspace(min(c_m), max(c_m))
+            gauss_sum = np.zeros(len(space))
 
-        for i in range(self.n_components):
-            mean = gmm.means_[i, m]
-            var = np.sqrt(gmm.covariances_[i, m])
-            weight = gmm.weights_[i]
+            for i in range(self.n_components):
+                mean = gmm.means_[i, m]
+                var = np.sqrt(gmm.covariances_[i, m])
+                weight = gmm.weights_[i]
 
-            gauss = weight * self.gaussian(space, mean, var)
-            gauss_sum += gauss
-            plt.plot(space, gauss * 450, label='Krzywa {}'.format(i + 1))
+                gauss = weight * self.gaussian(space, mean, var)
+                gauss_sum += gauss
+                plt.plot(space, gauss, label='Krzywa {}'.format(i + 1))
 
-        plt.plot(space, gauss_sum * 450, label='Sumaryczne dopasowanie')
-        plt.legend()
+            plt.plot(space, gauss_sum, label='Sumaryczne dopasowanie')
 
-        plt.show()
+            if legend:
+                plt.legend()
 
-        print("Score: {}".format(gmm.score(mfcc)))
+            if plot_show:
+                plt.show()
 
-        return gmm.aic(mfcc)
+        # print("Score: {}".format(gmm.score(mfcc)))
+
+        return {
+            'aic':  gmm.aic(mfcc),
+            'bic':  gmm.bic(mfcc)
+        }

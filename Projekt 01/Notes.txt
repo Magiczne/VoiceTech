@@ -1,0 +1,19 @@
+0. Wczytywanie danych
+1. Parametryzacja
+1.1 Zachowaæ strukturê parametryzacji:
+	- Mówca
+	- Parametry (MFCC/PLP)
+	- Klasa (np. nazwa pliku *.wav)	(serializacja?)
+2. Trening
+3. Test
+
+
+Libs:
+Pickle - seralizacja
+Matplotlib - wykresy
+Numpy - obliczenia numeryczne
+Scipy - ³adowanie plików wav + generowanie matematycznych pierdó³
+Sklearn - modele GMM
+Python speech features - parametryzacja MFCC
+
+Architektura:
