@@ -1,7 +1,8 @@
 import configparser
+from .Singleton import Singleton
 
 
-class Config:
+class Config(metaclass=Singleton):
     def __init__(self):
         self.config_ = configparser.ConfigParser()
         self.config_.read('../config.ini')
