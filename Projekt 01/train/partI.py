@@ -18,7 +18,7 @@ class FileInfo:
         self.fs, self.data = scipy.io.wavfile.read(self.file_name)
 
 
-class Parameters(object):
+class Parameters:
     """
 
     :type file_info: FileInfo
@@ -35,7 +35,7 @@ class Parameters(object):
         return self.file_info.file_name[6]
 
 
-class GMM(object):
+class GMM:
     """
 
     :type parameters: Parameters
@@ -44,7 +44,7 @@ class GMM(object):
         self.parameters = parameters
         self.n_components = n_components
         self.n_iter = n_iter
-        self.gmm = mixture.GaussianMixture(n_components=n_components, covariance_type='diag', max_iter=n_iter)
+        self.gmm = mixture.GaussianMixture(n_components=n_components, covariance_type='diag', max_iter=n_iter).fit(parameters.mfcc)
 
 
 for file in files_names:
