@@ -1,6 +1,7 @@
 import sklearn.mixture
 
 from .FileParameters import FileParameters
+from Classes import Config
 
 
 class FileModel:
@@ -8,7 +9,6 @@ class FileModel:
 
     def __init__(self, file_parameters, n_components, n_iter):
         """
-
         :type file_parameters:      FileParameters
         :param file_parameters:     File parameters object
         """
@@ -16,6 +16,12 @@ class FileModel:
         self.n_components = n_components
         self.n_iter = n_iter
 
-        mixture = sklearn.mixture.GaussianMixture(n_components=n_components, covariance_type='diag', max_iter=n_iter)
+        config = Config()
+
+        mixture = sklearn.mixture.GaussianMixture(
+            n_components=config.get_param('GMM', 'Components', int),
+            max_iter=config.get_param('GMM', 'Iterations', int),
+            covariance_type='diag'
+        )
 
         self.gmm = mixture.fit(file_parameters.mfcc)

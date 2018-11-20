@@ -1,3 +1,3 @@
-from . import Config, Singleton
+from .Config import Config
 
-__all__ = ['Config', 'Singleton']
+__all__ = ['Config']

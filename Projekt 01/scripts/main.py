@@ -8,6 +8,7 @@ def get_wav_files():
 
 
 def get_gmm_models(files):
+    """ Get GMM models for each of files """
     models = []
     for file in files:
         info = FileInfo(file)

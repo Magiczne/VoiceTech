@@ -1,19 +1,25 @@
 import configparser
+from os import path
+
 from .Singleton import Singleton
 
 
 class Config(metaclass=Singleton):
     def __init__(self):
         self.config_ = configparser.ConfigParser()
-        self.config_.read('../config.ini')
 
-    def get_param(self, section, param):
+        self.config_.read(path.abspath('config.ini'))
+
+        print(self.config_.sections())
+
+    def get_param(self, section, param, dtype):
         """
         Get param from the config file
 
-        :raises
+        :raises         KeyError
         :param section: Section name
         :param param:   Param name
+        :param dtype:   Param data type
         :return:        Config value
         """
         if section not in self.config_:
@@ -22,4 +28,4 @@ class Config(metaclass=Singleton):
         if param not in self.config_[section]:
             raise KeyError('Param not found in the config file')
 
-        return self.config_[section][param]
+        return dtype(self.config_[section][param])
