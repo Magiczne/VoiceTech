@@ -10,8 +10,6 @@ class Config(metaclass=Singleton):
 
         self.config_.read(path.abspath('config.ini'))
 
-        print(self.config_.sections())
-
     def get_param(self, section, param, dtype):
         """
         Get param from the config file
