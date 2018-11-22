@@ -27,4 +27,4 @@ class FileParameters:
         Get number that is present on the recording
         :return:    Number on the recording
         """
-        return self.file_info.file_name[6]
+        return int(self.file_info.file_name[-6])

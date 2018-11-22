@@ -4,17 +4,16 @@ from .FileParameters import FileParameters
 from Classes import Config
 
 
-class FileModel:
+class GmmModel:
     """ Class holding GMM model for the file """
 
-    def __init__(self, file_parameters, n_components, n_iter):
+    def __init__(self, mfcc, number):
         """
         :type file_parameters:      FileParameters
         :param file_parameters:     File parameters object
         """
-        self.parameters = file_parameters
-        self.n_components = n_components
-        self.n_iter = n_iter
+        self.mfcc = mfcc
+        self.number = number
 
         config = Config()
 
@@ -24,4 +23,4 @@ class FileModel:
             covariance_type='diag'
         )
 
-        self.gmm = mixture.fit(file_parameters.mfcc)
+        self.gmm = mixture.fit(self.mfcc)

@@ -1,5 +1,5 @@
 from .FileInfo import FileInfo
-from .FileModel import FileModel
+from .GmmModel import GmmModel
 from .FileParameters import FileParameters
 
-__all__ = ['FileInfo', 'FileModel', 'FileParameters']
+__all__ = ['FileInfo', 'GmmModel', 'FileParameters']
