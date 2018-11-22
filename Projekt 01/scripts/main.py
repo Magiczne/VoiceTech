@@ -5,6 +5,10 @@ import sklearn.model_selection
 from Classes.Analyzer import *
 
 
+def flatten(iterable):
+    return [y for x in iterable for y in x]
+
+
 def get_wav_files():
     """ Get list of wav files in the train directory """
     return glob.glob('../train/*.wav')
@@ -32,15 +36,21 @@ def get_gmm_models(data):
     kf = sklearn.model_selection.KFold(n_splits=len(data) // 2)
 
     all_models = []
+    all_tests_data = []
 
     for train_idx, test_idx in kf.split(data):
-        # print("TRAIN:", train_idx, "TEST:", test_idx)
-
         train_data = []
         for idx in train_idx:
             train_data.append(data[list(data.keys())[idx]])
 
-        train_data = [y for x in train_data for y in x]
+        test_data = []
+        for idx in test_idx:
+            test_data.append(data[list(data.keys())[idx]])
+
+        train_data = flatten(train_data)
+        test_data = flatten(test_data)
+
+        all_tests_data.append(test_data)
 
         models = []
         for i in range(10):
@@ -57,13 +67,13 @@ def get_gmm_models(data):
 
         all_models.append(models)
 
-    return all_models
+    return all_models, all_tests_data
 
 
 def main():
     files = get_wav_files()
     speaker_data = get_speaker_data(files)
-    all_models = get_gmm_models(speaker_data)  # Models for all of the numbers from (0-9)
+    all_models, all_tests_data = get_gmm_models(speaker_data)  # Models for all of the numbers from (0-9)
 
     print('dupa')
 
