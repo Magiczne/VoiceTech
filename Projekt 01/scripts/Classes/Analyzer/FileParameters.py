@@ -20,7 +20,7 @@ class FileParameters:
         Get speaker
         :return:    Speaker code
         """
-        return self.file_info.file_name[:-7]
+        return self.file_info.file_name[9:-7]
 
     def get_rec_num(self):
         """
