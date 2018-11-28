@@ -74,9 +74,17 @@ def main():
     files = get_wav_files()
     speaker_data = get_speaker_data(files)
     all_models, all_tests_data = get_gmm_models(speaker_data)  # Models for all of the numbers from (0-9)
-
-    print('dupa')
-
+    for models, tests in zip(all_models, all_tests_data):
+        for entry in tests:
+                print(entry.file_info.file_name[9:])
+                logs = []
+                nums = []
+                for model in models:
+                    logs.append(model.gmm.score(entry.mfcc))
+                    nums.append(model.number)
+                print(max(logs))
+                idx = logs.index(max(logs))
+                print(nums[idx])
 
 
 if __name__ == "__main__":
