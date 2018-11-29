@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../AM/.idea/AM.iml" filepath="$PROJECT_DIR$/../AM/.idea/AM.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../Akustyka Muzyczna/Lab 03/.idea/Lab 03.iml" filepath="$PROJECT_DIR$/../Akustyka Muzyczna/Lab 03/.idea/Lab 03.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/TM.iml" filepath="$PROJECT_DIR$/.idea/TM.iml" />
     </modules>
   </component>

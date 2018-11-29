@@ -70,22 +70,44 @@ def get_gmm_models(data):
     return all_models, all_tests_data
 
 
+def get_recognition_ratio(all_models, all_tests, results_fname='results.txt'):
+    results_file = open(results_fname, 'w+')
+    results_file.truncate(0)
+
+    all_count = sum([len(x) for x in all_tests])
+    correct_count = 0
+
+    for models, tests in zip(all_models, all_tests):
+        for entry in tests:
+            logs = []
+            nums = []
+
+            for model in models:
+                logs.append(model.gmm.score(entry.mfcc))
+                nums.append(model.number)
+
+            idx = logs.index(max(logs))
+
+            if nums[idx] == entry.get_rec_num():
+                correct_count += 1
+
+            results_file.write('{},{},{:.2f}\n'.format(entry.file_info.file_name[9:], nums[idx], max(logs)))
+
+    results_file.close()
+
+    rr = correct_count / all_count
+
+    return rr
+
+
 def main():
     files = get_wav_files()
     speaker_data = get_speaker_data(files)
     all_models, all_tests_data = get_gmm_models(speaker_data)  # Models for all of the numbers from (0-9)
 
-    for models, tests in zip(all_models, all_tests_data):
-        for entry in tests:
-                print(entry.file_info.file_name[9:])
-                logs = []
-                nums = []
-                for model in models:
-                    logs.append(model.gmm.score(entry.mfcc))
-                    nums.append(model.number)
-                print(max(logs))
-                idx = logs.index(max(logs))
-                print(nums[idx])
+    rr = get_recognition_ratio(all_models, all_tests_data)
+
+    print("RR: {:.2f}".format(rr))
 
 
 if __name__ == "__main__":
