@@ -27,3 +27,9 @@ class Config(metaclass=Singleton):
             raise KeyError('Param not found in the config file')
 
         return dtype(self.config_[section][param])
+
+    def write_param(self, section, param, value):
+        self.config_[section][param] = str(value)
+
+        with open('config.ini', 'w') as file:
+            self.config_.write(file)

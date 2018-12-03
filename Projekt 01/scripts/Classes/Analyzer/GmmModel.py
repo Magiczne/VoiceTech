@@ -20,7 +20,8 @@ class GmmModel:
         mixture = sklearn.mixture.GaussianMixture(
             n_components=config.get_param('GMM', 'Components', int),
             max_iter=config.get_param('GMM', 'Iterations', int),
-            covariance_type='diag'
+            covariance_type=config.get_param('GMM', 'Covariance', str),
+            random_state=3
         )
 
         self.gmm = mixture.fit(self.mfcc)

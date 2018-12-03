@@ -2,6 +2,7 @@ import python_speech_features
 import numpy as np
 
 from .FileInfo import FileInfo
+from Classes import Config
 
 
 class FileParameters:
@@ -12,8 +13,16 @@ class FileParameters:
         :type file_info:    FileInfo
         :param file_info:   File info object
         """
+
+        config = Config()
+
         self.file_info = file_info
-        self.mfcc = python_speech_features.mfcc(file_info.data, file_info.fs, winfunc=np.hamming)
+        self.mfcc = python_speech_features.mfcc(
+            file_info.data,
+            file_info.fs,
+            winfunc=np.hamming,
+            winlen=config.get_param('MFCC', 'WinLen', float)
+        )
 
     def get_speaker(self):
         """
