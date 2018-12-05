@@ -157,8 +157,19 @@ def main():
     # recognize(models, flatten(tests.values()))
 
     # Testing
+
     from eval import evaluate
+
+
+    files = get_train_files()
+    eval_files = get_eval_files()
+    speaker_data = get_speaker_data(files)
+    all_models, all_tests_data = get_gmm_models(speaker_data)
+    models = get_gmm_models(speaker_data, cross_validation=False)
+    tests = get_speaker_data(eval_files)
+    #recognize(models, flatten(tests.values()))
     evaluate('dupa.txt')
+
 
 
 if __name__ == "__main__":

@@ -20,8 +20,13 @@ class FileParameters:
         self.mfcc = python_speech_features.mfcc(
             file_info.data,
             file_info.fs,
+            appendEnergy=True,
             winfunc=np.hamming,
-            winlen=config.get_param('MFCC', 'WinLen', float)
+            winlen=config.get_param('MFCC', 'WinLen', float),
+            nfilt=7,
+            preemph=1,
+            ceplifter=0
+
         )
 
     def get_speaker(self):

@@ -13,8 +13,7 @@ AGH November 2017
 """
 import matplotlib.pyplot as plt
 
-
-def evaluate(results_fname="results.csv"):
+def evaluate(results_fname = 'result.csv'):
     """
     Main function that evaluates predictions stored in the CSV file. Function computes classification accuracy
     and plots confusion matrix.
@@ -290,3 +289,4 @@ def load_keys():
     keys['199.wav'] = 4
     keys['200.wav'] = 4
     return keys
+

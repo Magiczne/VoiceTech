@@ -1,7 +1,7 @@
 import sklearn.mixture
 
 from .FileParameters import FileParameters
-from Classes import Config
+from .. import Config
 
 
 class GmmModel:
