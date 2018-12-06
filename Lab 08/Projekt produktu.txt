@@ -1,0 +1,52 @@
+interfejs g³osowy sklepu
+jakieœ 3 kategorie produktów
+za pomoc¹ interfejsu mozna dokonaæ zakupów
+koñcowy pokaz 
+testy w innych grupach
+
+Sklep z ¿arówkami
+Zwyk³e
+- 50 W		3 sztuki
+- 60 W		0 sztuk
+- 100 W		15 sztuk
+Energooszczêdne
+- 3 W		5 sztuk
+- 5 W		5 sztuk
+- 10 W		3 sztuki
+LED		
+- Bia³e		3 sztuki
+- Niebieskie	3 sztuki
+- RGB		1 sztuka
+
+
+- System stacjonarny w formie automatu z napojami, tylko ¿e z ¿arówkami.
+- Uruchamiany przez czujnik ruchu, zatrzymanie przez 1,5 - 2s
+
+- Witaj w automacie z ¿arówkami, wybierz jak¹ ¿arówkê chcesz kupiæ:
+Zwyk³¹, Energooszczêdn¹, LED
+> Jeœli odpowie coœ innego to system mówi "Poda³eœ b³êdn¹ kategoriê, spróbuj ponownie"
+
+> Jeœli wybierze to:
+- "Dostêpne ¿arówki to: [TUTAJ WSTAW LISTÊ ¯ARÓWEK] [WSTAW ICH LICZBE]"
+- Wybierz ¿arówkê.
+
+> Jeœli odpowie coœ innego to system mówi "Przykro mi, nie mam takiego produktu w mojej ofercie. Wybierz jezsce raz"
+
+> Jeœli wybierze to:
++ Jeœli ¿arówki s¹
+- "Ile ¿arówek chcesz kupiæ?"
+> U¿ytkownik podaje liczbê, jesli nie poda liczby która zostanie rozpoznana to
+- "Podaj prawid³ow¹ liczbê produktów"
+> Jeœli nie ma tyle ¿arówek ile chce
+- "Przykro mi, mam tylko [N] ¿arówek, czy taka liczba Ci odpowiada?
+- TAK/NIE
+
+> Czy chcesz kupiæ coœ jeszce?
+TAK/NIE
+- procedura siê powtarza od momentu "Wybierz katerogiê i ¿arówkê, ale nie podaje listy produktów"
+
+Oto Twoja ¿arówka/i. W³ó¿ kartê p³atnicz¹ i postêpuj zgodnie z poleceniami terminala.
+
+
++ Jeœli ¿arówek nie ma.
+- "Przykro mi, ale wybrana ¿arówka nie jest dostêpna w tym momencie."
