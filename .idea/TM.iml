@@ -8,6 +8,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="AM" />
     <orderEntry type="module" module-name="Akustyka Muzyczna" />
+    <orderEntry type="module" module-name="AEFS" />
   </component>
   <component name="PyDocumentationSettings">
     <option name="renderExternalDocumentation" value="true" />
